@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <style>
+        body{
+            padding-top:0px
+        }
+    </style>
+
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="font-size: 18px; padding-top: 0px; background-color:#E0E0E0; height:90px;">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")">
+                    <img class="navbar-brand" src="~/warehouse2.png" style="width: 100px; height: 100px;">
+                </a>
+            </div>
+
+            @if (!User.IsInRole("Admin"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("About", "About", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("My orders", "Index", new { controller = "orders" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("Avalible warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("About", "About", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("List warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("List orders", "Index", new { controller = "orders" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                    </ul>
+                    @Html.Partial("_LoginPartial")
+                </div>
+            }
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

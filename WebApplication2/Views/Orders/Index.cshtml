@@ -1,0 +1,116 @@
+﻿@model IEnumerable<WebApplication2.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Orders list</h2>
+<br />
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" id="naracki">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.warehouse_id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.kolicina)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.poceten_datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.kraen_datum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Od)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Opis)
+            </th>
+            <th>
+                Approved
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.warehouse_id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kolicina)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.poceten_datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.kraen_datum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Od)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Opis)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.approved)
+            </td>
+            <td>
+                <button class="btn btn-danger delete_ord" data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Delete</button>
+                @if (User.IsInRole("Admin"))
+                {
+                    <button class="btn btn-success approve_ord" data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Approve</button>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#naracki").DataTable();
+
+
+            $(".delete_ord").on("click", function () {
+                var button = $(this);
+                id = $(this).attr("data-model-id");
+                //alert(id);
+                var url = "/orders/delete/" + id;
+                if (confirm("Are you sure you want to delete this order?")) {
+                    $.ajax({
+                        url: url,
+                        success: function () {
+                            button.parent("td").parent("tr").remove();
+                        }
+                    })
+                }
+            });
+
+            $(".approve_ord").on("click", function () {
+                var button = $(this);
+                id = $(this).attr("data-model-id");
+                //alert(id);
+                var url = "/orders/ApproveOrd/" + id;
+                if (confirm("Are you sure you want to approve this order?")) {
+                    $.ajax({
+                        url: url,
+                        success: function () {
+                            $(document.body).load(location.href);
+                        }
+                    })
+                }
+            })
+
+        })
+    </script>
+}
