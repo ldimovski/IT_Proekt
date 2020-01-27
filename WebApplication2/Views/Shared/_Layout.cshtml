@@ -24,7 +24,7 @@
                     <span class="icon-bar"></span>
                 </button>
                 <a href="@Url.Action("Index", "Home")">
-                    <img class="navbar-brand" src="~/warehouse2.png" style="width: 100px; height: 100px;">
+                    <img class="navbar-brand" src="~/warehouse2.png" style="width: 150px; height: 110px; padding-bottom:25px; padding-top:5px">
                 </a>
             </div>
 
@@ -36,7 +36,7 @@
                         <li>@Html.ActionLink("About", "About", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
                         <li>@Html.ActionLink("Contact", "Contact", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
                         <li>@Html.ActionLink("My orders", "Index", new { controller = "orders" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
-                        <li>@Html.ActionLink("Avalible warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("Warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
 
                     </ul>
                     @Html.Partial("_LoginPartial")
@@ -48,8 +48,8 @@
                     <ul class="nav navbar-nav">
                         <li>@Html.ActionLink("Home", "Index", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
                         <li>@Html.ActionLink("About", "About", new { controller = "Home" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
-                        <li>@Html.ActionLink("List warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
-                        <li>@Html.ActionLink("List orders", "Index", new { controller = "orders" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("Warehouses", "Index", new { controller = "warehouses" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
+                        <li>@Html.ActionLink("All orders", "Index", new { controller = "orders" }, new { hidefocus = "hidefocus", @style = "padding-top:30px" })</li>
                     </ul>
                     @Html.Partial("_LoginPartial")
                 </div>

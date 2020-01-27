@@ -48,10 +48,10 @@
                 @Html.DisplayFor(modelItem => item.kolicina)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.poceten_datum)
+                @item.poceten_datum.ToString("dd.MM.yyyy")
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.kraen_datum)
+                @item.kraen_datum.ToString("dd.MM.yyyy")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Od)
@@ -66,7 +66,14 @@
                 <button class="btn btn-danger delete_ord" data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Delete</button>
                 @if (User.IsInRole("Admin"))
                 {
-                    <button class="btn btn-success approve_ord" data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Approve</button>
+                    if (string.Compare(item.approved, "Pending") == 0)
+                    {
+                        <button class="btn btn-success approve_ord" data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Approve</button>
+                    }
+                    else
+                    {
+                        <button class="btn btn-success approve_ord" disabled data-model-id="@item.Id" style="width:90px; margin-bottom:5px;">Approve</button>
+                    }
                 }
             </td>
         </tr>

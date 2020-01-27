@@ -160,10 +160,6 @@ namespace WebApplication2.Controllers
 
         public JsonResult get_by_id(int id)
         {
-            //var naracki = db.Orders.SingleOrDefault(x => x.warehouse_id == id);
-            //var naracki = db.Orders;
-            //return naracki;
-            //var FoodList = "AA";
             List<Order> naracki = new List<Order>();
             Order naracki2 = new Order();
             string datumi;
@@ -176,14 +172,17 @@ namespace WebApplication2.Controllers
                     naracki.Add(item);
                     naracki2 = item;
                     //break;
-                    datumi = datumi + "<p> Order " + i + "<br />Start: " + item.poceten_datum.ToString("dd.MM.yyyy") + " End: " + item.kraen_datum.ToString("dd.MM.yyyy") + " Capacity: " + item.kolicina + "</p> <br /> ";
+                    datumi = datumi + "<p> <h4>Order " + i + ":</h4><br /><strong>Start: </strong>" + item.poceten_datum.ToString("dd.MM.yyyy") + " <strong>End: </strong>" + item.kraen_datum.ToString("dd.MM.yyyy") + " <strong>Capacity: </strong>" + item.kolicina + "</p> <br /> ";
                     i++;
                 }
                 
             }
-                //string nesto = naracki2.kraen_datum.ToString();
+            if (string.Compare(datumi, "") == 0)
+            {
+                datumi = datumi + "No orders on this warehouse.";
+            }
 
-                return Json(datumi.ToString(), JsonRequestBehavior.AllowGet);
+            return Json(datumi.ToString(), JsonRequestBehavior.AllowGet);
         }
     }
 }
